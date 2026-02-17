@@ -6,13 +6,13 @@ from selenium.webdriver.common.by import By
 driver = webdriver.Firefox()
 driver.maximize_window()
 
-# переход на google
-driver.get("https://www.google.com")
+# переход по ссылке
+driver.get(" http://the-internet.herokuapp.com/inputs")
 sleep(3)
 
 
 # найти поле поиска
-search = driver.find_element(By.CSS_SELECTOR, ".gLFyf")
+search = driver.find_element(By.TAG_NAME, "input")
 
 # ввести слово Sky
 search.send_keys("Sky")
