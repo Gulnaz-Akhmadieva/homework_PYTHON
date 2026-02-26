@@ -26,6 +26,9 @@ blue_button = wait.until(
 blue_button.click()
 print("Клик по синей кнопке выполнен")
 
+wait.until(
+    EC.text_to_be_present_in_element((By.CSS_SELECTOR, ".btn.btn-primary"), "SkyPro")
+)
 
 # получаем текст кнопки и выводим в консоль
 text = blue_button.text
