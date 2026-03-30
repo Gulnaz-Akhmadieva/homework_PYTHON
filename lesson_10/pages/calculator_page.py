@@ -8,7 +8,6 @@ class CalculatorPage:
         self.driver = driver
         self.wait = WebDriverWait(driver, 45)
 
-
     delay_input = (By.ID, "delay")
     button_7 = (By.XPATH, "//span[text()='7']")
     button_plus = (By.XPATH, "//span[text()='+']")
@@ -16,7 +15,7 @@ class CalculatorPage:
     button_equals = (By.XPATH, "//span[text()='=']")
     screen = (By.CSS_SELECTOR, ".screen")
 
-    def set_delay(self, value) -> None:
+    def set_delay(self, value: str) -> None:
         """Устанавливает задержку."""
         delay_input = self.driver.find_element(*self.delay_input)
         delay_input.clear()
@@ -42,6 +41,6 @@ class CalculatorPage:
         """Возвращает результат на экране."""
         return self.driver.find_element(*self.screen).text
 
-    def wait_for_result(self, expected) -> None:
+    def wait_for_result(self, expected: str) -> None:
         """Ждёт появления ожидаемого результата."""
         self.wait.until(EC.text_to_be_present_in_element(self.screen, expected))

@@ -36,7 +36,7 @@ class ShopPage:
         """Открывает страницу магазина."""
         self.driver.get("https://www.saucedemo.com/")
 
-    def login(self, username, password) -> None:
+    def login(self, username: str, password: str) -> None:
         """Авторизуется с указанными логином и паролем."""
         self.driver.find_element(*self.username_input).send_keys(username)
         self.driver.find_element(*self.password_input).send_keys(password)
@@ -65,7 +65,7 @@ class ShopPage:
         self.driver.find_element(*self.checkout_button).click()
         self.wait.until(EC.visibility_of_element_located(self.checkout_info))
 
-    def fill_checkout_info(self, first, last, zipcode) -> None:
+    def fill_checkout_info(self, first: str, last: str, zipcode: str) -> None:
         """Заполняет форму оформления заказа."""
         self.driver.find_element(*self.firstname_input).send_keys(first)
         self.driver.find_element(*self.lastname_input).send_keys(last)
