@@ -1,10 +1,17 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions as EC
 
 
 class CalculatorPage:
-    def __init__(self, driver):
+    """Страница калькулятора с задержкой."""
+
+    def __init__(self, driver: WebDriver) -> None:
+        """Инициализирует страницу.
+        Args:
+            driver (WebDriver): Экземпляр драйвера Selenium.
+        """
         self.driver = driver
         self.wait = WebDriverWait(driver, 45)
 
@@ -16,10 +23,13 @@ class CalculatorPage:
     screen = (By.CSS_SELECTOR, ".screen")
 
     def set_delay(self, value: str) -> None:
-        """Устанавливает задержку."""
-        delay_input = self.driver.find_element(*self.delay_input)
-        delay_input.clear()
-        delay_input.send_keys(value)
+        """Устанавливает задержку.
+        Args:
+            value (str): Значение задержки в секундах.
+        """
+        delay_field = self.driver.find_element(*self.delay_input)
+        delay_field.clear()
+        delay_field.send_keys(value)
 
     def press_7(self) -> None:
         """Нажимает кнопку 7."""
@@ -38,9 +48,15 @@ class CalculatorPage:
         self.driver.find_element(*self.button_equals).click()
 
     def get_result(self) -> str:
-        """Возвращает результат на экране."""
+        """Возвращает результат на экране.
+        Returns:
+            str: Текст результата.
+        """
         return self.driver.find_element(*self.screen).text
 
     def wait_for_result(self, expected: str) -> None:
-        """Ждёт появления ожидаемого результата."""
+        """Ждёт появления ожидаемого результата.
+        Args:
+            expected (str): Ожидаемый текст результата.
+        """
         self.wait.until(EC.text_to_be_present_in_element(self.screen, expected))

@@ -1,13 +1,17 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions as EC
 
 
 class ShopPage:
     """Страница интернет-магазина."""
 
-    def __init__(self, driver) -> None:
-        """Инициализирует страницу."""
+    def __init__(self, driver: WebDriver) -> None:
+        """Инициализирует страницу.
+        Args:
+            driver (WebDriver): Экземпляр драйвера Selenium.
+        """
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)
 
@@ -37,7 +41,11 @@ class ShopPage:
         self.driver.get("https://www.saucedemo.com/")
 
     def login(self, username: str, password: str) -> None:
-        """Авторизуется с указанными логином и паролем."""
+        """Авторизуется с указанными логином и паролем.
+        Args:
+            username (str): Логин пользователя.
+            password (str): Пароль пользователя.
+        """
         self.driver.find_element(*self.username_input).send_keys(username)
         self.driver.find_element(*self.password_input).send_keys(password)
         self.driver.find_element(*self.login_button).click()
@@ -66,7 +74,12 @@ class ShopPage:
         self.wait.until(EC.visibility_of_element_located(self.checkout_info))
 
     def fill_checkout_info(self, first: str, last: str, zipcode: str) -> None:
-        """Заполняет форму оформления заказа."""
+        """Заполняет форму оформления заказа.
+        Args:
+            first (str): Имя.
+            last (str): Фамилия.
+            zipcode (str): Почтовый индекс.
+        """
         self.driver.find_element(*self.firstname_input).send_keys(first)
         self.driver.find_element(*self.lastname_input).send_keys(last)
         self.driver.find_element(*self.postal_input).send_keys(zipcode)
@@ -77,5 +90,8 @@ class ShopPage:
         self.wait.until(EC.visibility_of_element_located(self.cart_list))
 
     def get_total_text(self) -> str:
-        """Возвращает итоговую сумму заказа."""
+        """Возвращает итоговую сумму заказа.
+        Returns:
+            str: Текст итоговой суммы.
+        """
         return self.driver.find_element(*self.total_label).text

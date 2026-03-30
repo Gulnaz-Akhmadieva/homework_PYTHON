@@ -22,7 +22,7 @@ def test_calculator(driver):
         calculator_page.driver.get("https://bonigarcia.dev/selenium-webdriver-java/slow-calculator.html")
 
     with allure.step("Установить задержку 45 секунд"):
-            calculator_page.set_delay(45)
+            calculator_page.set_delay("45")
 
     with allure.step("Нажать кнопки 7 + 8 ="):
         calculator_page.press_7()
